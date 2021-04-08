@@ -4,7 +4,7 @@ USER root
 RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.6/julia-1.6.0-linux-x86_64.tar.gz && \
     tar -xvzf julia-1.6.0-linux-x86_64.tar.gz && \
     mv julia-1.5.3 /opt/ && \
-    ln -s /opt/julia-1.5.3/bin/julia /usr/local/bin/julia && \
+    ln -s /opt/julia-1.6.0/bin/julia /usr/local/bin/julia && \
     rm julia-1.5.3-linux-x86_64.tar.gz
 
 USER ${NB_USER}

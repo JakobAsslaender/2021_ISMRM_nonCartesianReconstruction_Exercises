@@ -16,38 +16,14 @@ end
 # ╔═╡ 65780f00-ed6b-11ea-1ecf-8b35523a7ac0
 begin
 	import Pkg
-	Pkg.activate(mktempdir())
-#	Pkg.add([
-#			Pkg.PackageSpec(name="GR")
-#			])
-#	Pkg.build("GR")
-	Pkg.add([
-			Pkg.PackageSpec(name="Images"),#, version="0.22.4"), 
-#			Pkg.PackageSpec(name="ImageMagick", version="0.7"), 
-			Pkg.PackageSpec(name="PlutoUI"),#, version="0.7"), 
-			Pkg.PackageSpec(name="HypertextLiteral"),#, version="0.5"),
-#			Pkg.PackageSpec(name="TestImages"),
-#			Pkg.PackageSpec(name="MIRT"),
-			Pkg.PackageSpec(name="LinearAlgebra"),
-			Pkg.PackageSpec(name="ImageQualityIndexes"),
-			Pkg.PackageSpec(name="MRIReco"),
-			Pkg.PackageSpec(name="PlotlyJS"),
-			Pkg.PackageSpec(name="Plots"),
-			Pkg.PackageSpec(name="IterativeSolvers"),
-			Pkg.PackageSpec(name="FFTW")
-			])
-
-	using Images
+	Pkg.activate(pwd())
+	
 	using Plots
 	plotlyjs()
 	using PlutoUI
-	using HypertextLiteral
-#	import TestImages
-#	using MIRT #: ellipse_im, jim # https://github.com/JeffFessler/MIRT.jl
 	using FFTW
 	using MRIReco
 	using LinearAlgebra
-	using ImageQualityIndexes
 	using IterativeSolvers
 end
 
@@ -291,23 +267,6 @@ reco_cg = reshape(cg(A, b, maxiter=50), (isqrt(size(A,1)),isqrt(size(A,1))))
 # ╔═╡ ce933bda-ac45-46ec-b577-c4168b1ce569
 heatmap(abs.(reco_cg), c=:grays, clim=(0,1))
 
-# ╔═╡ ea8d92f8-159c-4161-8c54-bab7bc00f290
-md"""
-> ### Note about _mutation_
-> There are two ways to think about this exercise, you could _modify_ the original vector, or you can _create a new vector_. We often prefer the second version, so that the original data is preserved. We generally only use code of the first variant in the most performance-sensitive parts of a program, as it requires more care to write and use correctly. _**Be careful not to get carried away in optimizing code**, especially when learning a new language!_
-> 
-> There is a convention among Julians that functions that modify their argument have a `!` in their name. For example, `sort(x)` returns a sorted _copy_ of `x`, while `sort!(x)` _modifies_ `x` to be sorted.
-> 
-> #### Tips for writing non-mutating code
-> 1. _Rewriting_ an existing mutating function to be non-mutating can feel like a 'tedious' and 'inefficient' process. Often, instead of trying to **rewrite** a mutating function, it's best to take a step back and try to think of your problem as _constructing something new_. Instead of a `for` loop, it might make more sense to use **descriptive** primitives like [broadcasting with the dot syntax](https://docs.julialang.org/en/v1/manual/functions/#man-vectorized) (also for [math operators](https://docs.julialang.org/en/v1/manual/mathematical-operations/#man-dot-operators)), and [map and filter](https://www.youtube.com/watch?v=_O-HBDZMLrM).
-> 
-> 
-> 2. If a mutating algorithm makes the most sense for your problem, then you can first use `copy` to create a copy of an array, and then modify that copy.
-> 
-> We will cover this topic more in the later exercises!
-
-"""
-
 # ╔═╡ 756d150a-b7bf-4bf5-b372-5b0efa80d987
 md"## Function library
 
@@ -524,7 +483,6 @@ bigbreak
 # ╟─a0e0fba0-39e1-4873-8d7e-ee5cb793062c
 # ╠═86af3791-f3e6-45bc-bc4e-072803491d1f
 # ╟─4bccda27-d96b-4234-b5e4-933422b4a157
-# ╠═ea8d92f8-159c-4161-8c54-bab7bc00f290
 # ╟─91f4778e-ee20-11ea-1b7e-2b0892bd3c0f
 # ╟─756d150a-b7bf-4bf5-b372-5b0efa80d987
 # ╟─4bc94bec-da39-4f8a-82ee-9953ed73b6a4

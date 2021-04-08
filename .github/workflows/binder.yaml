@@ -1,5 +1,8 @@
-name: Build pluto notebooks for mybinder.org
-on: push
+name: Build plutonotebooks for mybinder.org
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   binder:

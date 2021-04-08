@@ -1,4 +1,4 @@
-name: Build plutonotebooks for mybinder.org
+name: Build pluto notebooks for mybinder.org
 on:
   push:
     branches:
@@ -20,3 +20,5 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         BINDER_CACHE: true
         PUBLIC_REGISTRY_CHECK: true
+        NO_PUSH: true
+		MYBINDERORG_TAG: ${{ github.event.ref }} # This builds the container on mybinder.org with the branch that was pushed on.

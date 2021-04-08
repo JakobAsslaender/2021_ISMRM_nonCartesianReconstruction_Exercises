@@ -4,4 +4,4 @@ This notebook contains _built-in, live answer checks_! In some exercises you wil
 
 ### Notebooks
 
-[Run excercies on Binder](https://mybinder.org/v2/gh/JakobAsslaender/2021_ISMRM_nonCartesianReconstruction_Exercises/HEAD?urlpath=pluto/open?path=/home/jovyan/notebooks/nonCart_Exercises.jl)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JakobAsslaender/2021_ISMRM_nonCartesianReconstruction_Exercises/HEAD?urlpath=pluto/open?path=/home/jovyan/notebooks/nonCart_Exercises.jl)

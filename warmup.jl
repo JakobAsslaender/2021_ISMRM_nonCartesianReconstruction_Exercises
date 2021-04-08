@@ -1,9 +1,11 @@
-using StatsPlots
-using Distributions
+using Plots
+plotlyjs()
+using PlutoUI
+using FFTW
+using MRIReco
+using LinearAlgebra
+using IterativeSolvers
 
-mu = 3.14;
-sigma = 1.0;
-x = [mu - 5 * sigma:0.1:mu + 5 * sigma;];
-N = Normal(mu, sigma^2);
-p = plot(x, pdf.(N, x));
+p = scatter(rand(10), rand(10));
 display(p)
+println("Warm-up done.")

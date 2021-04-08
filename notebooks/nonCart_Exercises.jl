@@ -15,9 +15,6 @@ end
 
 # ╔═╡ 65780f00-ed6b-11ea-1ecf-8b35523a7ac0
 begin
-	import Pkg
-	Pkg.activate(pwd())
-	
 	using Plots
 	plotlyjs()
 	using PlutoUI

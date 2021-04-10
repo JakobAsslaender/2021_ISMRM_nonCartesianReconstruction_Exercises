@@ -20,7 +20,7 @@ Download [Julia](https://julialang.org/downloads/)
 
 Run Julia and type the following commands:
 
-`import Pkg; Pkg.develope(url="https://github.com/JakobAsslaender/2021_ISMRM_nonCartesianReconstruction_Exercises")`
+`import Pkg; Pkg.develop(url="https://github.com/JakobAsslaender/2021_ISMRM_nonCartesianReconstruction_Exercises")`
 
 This will install everything you need. Thereafter you just need to import the package:
 

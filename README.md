@@ -1,7 +1,34 @@
-# Excercise for the ISMRM Lecture on _Reconstruction of Non-Cartesian Data_
+# Exercise for the ISMRM Lecture on _Reconstruction of Non-Cartesian Data_
 
-This notebook contains _built-in, live answer checks_! In some exercises you will see a coloured box, which runs a test case on your code, and provides feedback based on the result. Simply edit the code, run it, and the check runs again.
+`Session: Image Reconstruction`
 
-### Notebooks
+Live Q&A in your local time zone:
+<p id="demo"></p>
+<script>
+document.getElementById("demo").innerHTML = new Date('5/16/2021 13:45 UTC').toString();
+</script>
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JakobAsslaender/2021_ISMRM_nonCartesianReconstruction_Exercises/HEAD?urlpath=pluto/open?path=/home/jovyan/notebooks/nonCart_Exercises.jl)
+This notebook contains _built-in, live answer checks_! In some exercises you will see a colored box, which runs a test case on your code, and provides feedback based on the result. Simply edit the code, run it (`Shift` + `Enter`), and the check runs again as the notebook _reactive_: whenever you change a cell, all affected cells are evaluated, which will become important in Exercises 3-4.
+
+Joint the live Q&A session if you have questions, or reach out via [email](mailto:jakob.asslaender@nyumc.org)!
+
+### Run in the cloud:
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JakobAsslaender/2021_ISMRM_nonCartesianReconstruction_Exercises/HEAD?urlpath=pluto/open?path=/home/jovyan/src/nonCart_PlutoNotebook.jl)
+
+
+### Run on your own computer:
+
+Download [Julia](https://julialang.org/downloads/)
+
+Run Julia and type the following commands:
+
+`ìmport Pkg; Pkg.develope(url="https://github.com/JakobAsslaender/2021_ISMRM_nonCartesianReconstruction_Exercises")`
+
+This will install everything you need. Thereafter you just need to import the package:
+
+`import ISMRM_nonCartesianReconstruction_Exercises`
+
+and start the notebook with the exercises:
+
+`ISMRM_nonCartesianReconstruction_Exercises.run()`

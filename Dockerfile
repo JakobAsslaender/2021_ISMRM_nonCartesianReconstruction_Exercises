@@ -14,7 +14,7 @@ COPY --chown=${NB_USER}:users ./environment.yml ./environment.yml
 COPY --chown=${NB_USER}:users ./setup.py ./setup.py
 COPY --chown=${NB_USER}:users ./runpluto.sh ./runpluto.sh
 
-COPY --chown=${NB_USER}:users ./notebooks ./notebooks
+COPY --chown=${NB_USER}:users ./src ./src
 COPY --chown=${NB_USER}:users ./Project.toml ./Project.toml
 COPY --chown=${NB_USER}:users ./Manifest.toml ./Manifest.toml
 

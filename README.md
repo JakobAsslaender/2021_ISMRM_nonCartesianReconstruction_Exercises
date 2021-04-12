@@ -6,14 +6,14 @@ Live Q&A 5/16/2021 13:45 UTC
 
 Joint the live Q&A session if you have questions, or reach out via [email](mailto:jakob.asslaender@nyumc.org)!
 
-### Run in the cloud:
+### Run the exercise in the cloud:
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JakobAsslaender/2021_ISMRM_nonCartesianReconstruction_Exercises/HEAD?urlpath=pluto/open?path=/home/jovyan/src/nonCart_PlutoNotebook.jl)
 
 
-### Run on your own computer:
+### Run the exercise on your own computer:
 
-- Download [Julia](https://julialang.org/downloads/)
+- Download [Julia](https://julialang.org/downloads/) (tested on v1.6.0)
 
 - Run Julia 
 
@@ -21,7 +21,7 @@ Joint the live Q&A session if you have questions, or reach out via [email](mailt
 
 `import Pkg; Pkg.develop(url="https://github.com/JakobAsslaender/2021_ISMRM_nonCartesianReconstruction_Exercises")`
 
-- Load the main packages:
+- Import the main package:
 
 `import ISMRM_nonCartesianReconstruction_Exercises`
 

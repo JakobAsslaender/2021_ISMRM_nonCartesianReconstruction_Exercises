@@ -29,7 +29,7 @@ end
 # ╔═╡ ac8ff080-ed61-11ea-3650-d9df06123e1f
 md"""
 
-# **Exercise for the ISMRM Lecture on _Reconstruction of Non-Cartesian Data_**
+# **Exercise for the ISMRM Lecture on the _Reconstruction of Non-Cartesian Data_**
 `Session: Image Reconstruction`
 """
 
@@ -47,7 +47,7 @@ document.getElementById("demo").innerHTML = new Date('5/16/2021 13:45 UTC').toSt
 md"""
 This notebook contains _built-in, live answer checks_! In some exercises you will see a colored box, which runs a test case on your code, and provides feedback based on the result. Simply edit the code, run it (`Shift` + `Enter`), and the check runs again as the notebook _reactive_: whenever you change a cell, all affected cells are evaluated, which will become important in Exercises 3-4.
 
-Joint the live Q&A session if you have questions, or reach out via [email](mailto:jakob.asslaender@nyumc.org)!
+Join the live Q&A session if you have questions, or reach out via [email](mailto:jakob.asslaender@nyumc.org)!
 """
 
 # ╔═╡ 5f95e01a-ee0a-11ea-030c-9dba276aba92
@@ -61,7 +61,7 @@ Most functionality in Julia in provided by so-called _packages_. On binder, I al
 md"""
 ## **Exercise 0** - _Julia 101_
 
-Let's start by creating a numerical phantom and calculate the Cartesian k-space. If you are new to Julia, this code can give a glimpse at its syntax.
+Let's start by creating a numerical phantom and calculate the Cartesian k-space. If you are new to Julia, this code will give a glimpse at its syntax.
 
 Let's choose a (quadratic) matrix size:
 
@@ -82,7 +82,7 @@ image_org = reverse(shepp_logan(nx),dims=1)
 
 # ╔═╡ 9391828f-041c-49db-93d8-3483bb672f3d
 md"
-And let's plot it with the Plots package:
+And let's plot it with the `Plots` package:
 "
 
 # ╔═╡ 67bedf95-8ff4-430f-8737-a0d21ff368c8
@@ -93,16 +93,16 @@ md"Color scaling:"
 
 # ╔═╡ c6be8293-7f7c-48a7-b112-92f7ae4fb7c8
 md"
-FFT functionality is provided by the FFTW package:
+FFT functionality is provided by the `FFTW` package and the syntax is very similar to Matlab:
 "
 
 # ╔═╡ 35022e16-d376-426c-a9f8-b71760bcaaf7
 k_Cart = fftshift(fft(image_org))
 
 # ╔═╡ 40a94bcd-a0cc-4b1a-b370-6405adc0f92b
-md"**Dot syntax**: In comparison to Matlab, Julia distinguishes more explicitly between functions that act on a matrix as a whole or on each element. E.g. `exp(image_org)` calculates the matrix exponential of `image_org`, while `exp.(image_org)` calculates the exponential of each element of `image_org`.
+md"**Dot syntax**: In comparison to Matlab, Julia distinguishes more explicitly between functions that act on a matrix as a whole or on each element. E.g. `exp(x)` calculates the matrix exponential of `x`, while `exp.(x)` calculates the exponential of each element of `x`.
 
-Replace `missing` to calculate the absolute value of `k_Cart`:
+Use the dot-syntax to calculate the absolute value `abs` of `k_Cart`:
 . "
 
 # ╔═╡ c0afaa73-aa46-4f61-a5b4-c49d071f4fb6
@@ -133,7 +133,7 @@ end
 
 # ╔═╡ ad6a33b0-eded-11ea-324c-cfabfd658b56
 md"""
-## Exerise 1 - _filtered back-projection_
+## Exercise 1 - _filtered back-projection_
 
 For Exercises 1-4, we will use a radial trajectory. In radial sampling, we need to acquire $\pi/2$-times as many _spokes_ compared to Cartesian k-space lines in order to fulfill the Nyquist theorem at the edge of k-space. This is the price you pay for a higher sampling density in the center:
 """
@@ -143,7 +143,7 @@ nspokes = ceil(Int, nx * π/2 + 20)
 
 # ╔═╡ 137ed83c-171f-48df-be8e-dc538ac18929
 md"
-The added 20 are just to achieve a slightly higher numerical accuracy. In practice, this should not be necessary.
+The added 20 improve the numerical accuracy. In practice, this should not be necessary.
 
 In the readout direction, we use the usual 2-fold oversampling:
 "
@@ -169,7 +169,7 @@ html"""
 <code>F</code> is a linear operator and the <em>MRIReco.jl</em> package uses Julia's 
 
 <a href="https://docs.julialang.org/en/v1/manual/methods/" target="_blank">multiple dispatch</a>
-to implement a <code>*</code> function for this operator. Despit it being a much more efficient implemenentation, <code>F</code> essentially acts like a matrix and we can calculate the k-space signal with something that looks like a matrix-vector multiplication:
+to implement a <code>*</code> method for this operator. Despit it being a much more efficient implemenentation, <code>F</code> essentially acts like a matrix and we can calculate the k-space signal with something that looks like a matrix-vector multiplication:
 """
 
 # ╔═╡ f6d6fe5e-3381-4338-817d-366194b3f7ba
@@ -194,7 +194,7 @@ md"Color scaling:"
 
 # ╔═╡ bfa47923-d80b-43ea-a21e-f3dad07b4958
 md"""
-If you change the color scaling, it should become apparent that the image still has artifacts. Take a close look at the k-space trajectory plotted above, and compare it to the Cartesian k-space. You should see that the radial k-space trajectory does not acquire the corners of k-space, which results in the here observed artifacts. For comparison, you can cut out the Cartesian k-space and observe the "original image" and it's Cartesian k-space at the very top.
+If you change the color scaling, it should become apparent that the image still has artifacts. Take a look at the k-space trajectory plotted above, and compare it to the Cartesian k-space. You should see that the radial k-space trajectory does not acquire the corners of k-space, which results in the here observed artifacts. For comparison, you can cut out the Cartesian k-space and observe the "original image" and it's Cartesian k-space at the very top.
 """
 
 # ╔═╡ 05d84e43-d768-4680-82eb-d3a5419edd85
@@ -477,7 +477,7 @@ The correct answer is
 density_compensation = repeat(abs.(-nr/2 : nr/2-1), nspokes)
 ```
 
-Alterantively, this is also correct:
+or, equivalently:
 
 ```
 density_compensation = sqrt.(trj.nodes[1,:].^2 + trj.nodes[2,:].^2)
@@ -640,7 +640,7 @@ bigbreak
 # ╟─810b38a1-490f-4e22-8edb-0e50a8af2f28
 # ╟─8a3dc74a-4b20-4c0f-96e8-1ab0451a7da3
 # ╟─aefd5a3d-9b7d-40a1-9cc8-1a5b555d251d
-# ╠═515ae3f8-fb28-49b9-a023-38d143b6674a
+# ╟─515ae3f8-fb28-49b9-a023-38d143b6674a
 # ╟─ad6a33b0-eded-11ea-324c-cfabfd658b56
 # ╠═28668257-321b-41f2-bfe2-d5f35441ec8d
 # ╟─137ed83c-171f-48df-be8e-dc538ac18929

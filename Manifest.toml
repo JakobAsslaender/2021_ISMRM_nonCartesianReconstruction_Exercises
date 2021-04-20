@@ -1005,11 +1005,11 @@ version = "1.11.2"
 
 [[Pluto]]
 deps = ["Base64", "Dates", "Distributed", "FuzzyCompletions", "HTTP", "InteractiveUtils", "Logging", "Markdown", "MsgPack", "Pkg", "REPL", "Sockets", "TableIOInterface", "Tables", "UUIDs"]
-git-tree-sha1 = "14d0eec447e4c95082ddf27cb42d0a6f40e16d4b"
-repo-rev = "Patch-1"
-repo-url = "https://github.com/VEZY/Pluto.jl.git"
+git-tree-sha1 = "b15b1d3482ea9e4b6fe1e5ee300182e39180069c"
+repo-rev = "main"
+repo-url = "https://github.com/fonsp/Pluto.jl.git"
 uuid = "c3e4b0f8-55cb-11ea-2926-15256bba5781"
-version = "0.12.20"
+version = "0.14.1"
 
 [[PlutoUI]]
 deps = ["Base64", "Dates", "InteractiveUtils", "Logging", "Markdown", "Random", "Suppressor"]

@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.14.2
+# v0.14.4
 
 using Markdown
 using InteractiveUtils
@@ -17,6 +17,7 @@ end
 begin
 	import Pkg
 	Pkg.activate("..")
+	Pkg.instantiate()
 	using Plots
 	plotlyjs()
 	using PlutoUI
@@ -106,7 +107,7 @@ Use the dot-syntax to calculate the absolute value `abs` of `k_Cart`:
 . "
 
 # ╔═╡ c0afaa73-aa46-4f61-a5b4-c49d071f4fb6
-abs_k_Cart = missing
+abs_k_Cart = abs.(k_Cart)
 
 # ╔═╡ 515ae3f8-fb28-49b9-a023-38d143b6674a
 begin
@@ -184,7 +185,7 @@ md"Let's try to reconstruct this data with a back-projection. As discussed in th
 Tip: For radial imaging, the density is only a function of `r`, so you only need to replace `ones(nr)`."
 
 # ╔═╡ 16ad1b20-f3c8-4516-b5d9-6150875c326c
-density_compensation = repeat(ones(nr), nspokes)
+density_compensation = repeat(abs.(-nr/2:nr/2-1), nspokes)
 
 # ╔═╡ 9aff92eb-8094-4a83-ad27-242277b9aee1
 md"With the correct density compensation, we can reconstruct the image:"
@@ -243,26 +244,14 @@ where $F$ is our NFFT-Operator, $F'$ its adjoint, and $s$ is the measured signal
 Great, so let's do that! Replace the `missing` in the following two cells:
 """
 
-# ╔═╡ 32bc54d1-4ea8-4663-ba9a-03d357eb8c02
-A = randn(256, 256)
-
-# ╔═╡ 51b2f56b-3880-4ba6-828a-104334bad1ec
-b = randn(256)
-
 # ╔═╡ 698d0344-ec5d-4c27-a2b1-b52825e398d6
 md"Now we have everything in place to run a reconstruction with conjugate gradients:"
-
-# ╔═╡ 57a2c882-760c-4ff9-9bcb-be8f358d7b8a
-reco_cg = reshape(cg(A, b, maxiter=50), (isqrt(size(A,1)),isqrt(size(A,1))));
 
 # ╔═╡ 93f84f84-fdf3-41fa-88f8-2a26b8d6982a
 md"Color scaling:"
 
 # ╔═╡ 33b23b5c-85e7-49ba-9e4a-27d67943ee73
 @bind cmax_cg Slider(0:.1:1, default=1)
-
-# ╔═╡ ce933bda-ac45-46ec-b577-c4168b1ce569
-heatmap(abs.(reco_cg), c=:grays, clim=(0,cmax_cg))
 
 # ╔═╡ f6447d81-6612-428d-b3d7-acd7f8756df5
 md"""
@@ -285,6 +274,9 @@ md"oversamplingFactor = "
 
 # ╔═╡ beccb301-1c40-4c41-8960-462a82eca3ad
 F = NFFTOp(size(image_org), trj; oversamplingFactor=oversamplingFactor, kernelSize=kernelSize)
+
+# ╔═╡ 32bc54d1-4ea8-4663-ba9a-03d357eb8c02
+A = F' * F
 
 # ╔═╡ 62934cdb-526d-4f97-afc0-20bcd9f9714e
 md"""
@@ -327,6 +319,15 @@ reco_bp = reshape(F' * (k_radial .* density_compensation), (nx, nx));
 
 # ╔═╡ b62f8883-02cd-4ab0-9c27-61283e4839f6
 heatmap(abs.(reco_bp), c=:grays, clim=(minimum(abs.(reco_bp)),cmax_bp))
+
+# ╔═╡ 51b2f56b-3880-4ba6-828a-104334bad1ec
+b = F' * k_radial
+
+# ╔═╡ 57a2c882-760c-4ff9-9bcb-be8f358d7b8a
+reco_cg = reshape(cg(A, b, maxiter=50), (isqrt(size(A,1)),isqrt(size(A,1))));
+
+# ╔═╡ ce933bda-ac45-46ec-b577-c4168b1ce569
+heatmap(abs.(reco_cg), c=:grays, clim=(0,cmax_cg))
 
 # ╔═╡ 843dcc64-3015-4682-bae7-ddd86a8615fa
 md"When scrolling up, you should see that the RMSE test for the CG reconstruction fails again and the image has artifacts (use the slider to change the color scaling). Change the kernel size and oversampling until the RMSE test is once more passed and the ghosting-artifacts dissapear."
@@ -431,7 +432,7 @@ k_spiral_or = dft_or(image_org, trj_spiral, ω)
 md"Replace the normal `NFFTOp`-operator with the `FieldmapNFFTOp`-operator. Once you copy and pasted the constructor call, _Live docs_ a the bottom right will tell you the required and (optional) arguments of the function."
 
 # ╔═╡ a49fa464-56f8-4c4a-8e14-00977cb033a6
-F_spiral_or = NFFTOp(size(image_org), trj_spiral)
+F_spiral_or = FieldmapNFFTOp(size(image_org), trj_spiral, ω)
 
 # ╔═╡ 8b894d85-2dcd-4927-9e0d-91eb93c8f3dd
 reco_or = reshape(cg(F_spiral_or' * F_spiral_or, F_spiral_or' * k_spiral_or, maxiter=50), (isqrt(size(F_spiral_or,2)),isqrt(size(F_spiral_or,2))));

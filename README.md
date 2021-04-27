@@ -7,7 +7,7 @@ Live Q&A 5/16/2021 13:45 UTC
 Join the live Q&A session if you have questions, or reach out via [email](mailto:jakob.asslaender@nyumc.org)!
 
 ### Run the exercises in the cloud
-A click on below button will start a virtual machine on a _binder_ server (can take a couple of minutes) and opens the notebook with the exercises in your browser:
+A click on the button below will start a virtual machine on a _binder_ server (can take a couple of minutes) and opens the notebook with the exercises in your browser:
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JakobAsslaender/2021_ISMRM_nonCartesianReconstruction_Exercises/HEAD?urlpath=pluto/open?path=/home/jovyan/src/nonCart_PlutoNotebook.jl)
 
@@ -16,7 +16,7 @@ A click on below button will start a virtual machine on a _binder_ server (can t
 
 The computational resources on _binder_ are somewhat limited. The notebook should run a bit faster on your own computer. The installation is rather simple and explained in the following:
 
-- Download [Julia](https://julialang.org/downloads/) (tested on v1.6.0)
+- Download [Julia](https://julialang.org/downloads/) (tested on v1.6.1)
 
 - Run Julia 
 

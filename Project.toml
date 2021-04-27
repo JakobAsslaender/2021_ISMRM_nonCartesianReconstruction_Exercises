@@ -1,7 +1,7 @@
 name = "ISMRM_nonCartesianReconstruction_Exercises"
 uuid = "88c5b349-2ee0-48cb-a29e-fc59caac8c71"
 authors = ["Jakob Asslaender <jakob.asslaender@nyumc.org>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 FFTW = "7a1cc6ca-52ef-59f5-83cd-3a7055c09341"

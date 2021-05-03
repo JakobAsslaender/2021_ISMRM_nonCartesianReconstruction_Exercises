@@ -98,7 +98,7 @@ FFT functionality is provided by the `FFTW` package and the syntax is very simil
 "
 
 # ╔═╡ 35022e16-d376-426c-a9f8-b71760bcaaf7
-k_Cart = fftshift(fft(image_org))
+k_Cart = fftshift(fft(fftshift(image_org)))
 
 # ╔═╡ 40a94bcd-a0cc-4b1a-b370-6405adc0f92b
 md"**Dot syntax**: In comparison to Matlab, Julia distinguishes more explicitly between functions that act on a matrix as a whole or on each element. E.g. `exp(x)` calculates the matrix exponential of `x`, while `exp.(x)` calculates the exponential of each element of `x`.
@@ -262,9 +262,6 @@ md"Color scaling:"
 # ╔═╡ 33b23b5c-85e7-49ba-9e4a-27d67943ee73
 @bind cmax_cg Slider(0:.1:1, default=1)
 
-# ╔═╡ ce933bda-ac45-46ec-b577-c4168b1ce569
-heatmap(abs.(reco_cg), c=:grays, clim=(0,cmax_cg))
-
 # ╔═╡ f6447d81-6612-428d-b3d7-acd7f8756df5
 md"""
 ## Exerise 3 - _the puzzle_
@@ -286,6 +283,9 @@ md"oversamplingFactor = "
 
 # ╔═╡ beccb301-1c40-4c41-8960-462a82eca3ad
 F = NFFTOp(size(image_org), trj; oversamplingFactor=oversamplingFactor, kernelSize=kernelSize)
+
+# ╔═╡ ce933bda-ac45-46ec-b577-c4168b1ce569
+heatmap(abs.(reco_cg), c=:grays, clim=(0,cmax_cg), annotations=(size(reco_cg,1) ÷ 1.35,size(reco_cg,2) ÷ 1.1,string("kernelSize = ", kernelSize, "<br>oversamplingFactor = ", oversamplingFactor), :white))
 
 # ╔═╡ 62934cdb-526d-4f97-afc0-20bcd9f9714e
 md"""
@@ -570,8 +570,8 @@ begin
 		keep_working(md"`reco_cg` does not have the correct size. I should be the same as `image_org`")
 	else
 		error_cg = round(calculate_error(reco_cg, image_org, k_mask) * 10000) / 10000
-		if error_cg > 0.002
-			keep_working(md"You are getting an image, but it's not quite looking like `image_org`. The normalized RMSE is $error_cg, but it should be below 0.002.")
+		if error_cg > 0.003
+			keep_working(md"You are getting an image, but it's not quite looking like `image_org`. The normalized RMSE is $error_cg, but it should be below 0.003.")
 		else
 			correct(md"Well done! You master the art of iterative reconstructions! The normalized RMSE is $error_cg. ")
 		end
